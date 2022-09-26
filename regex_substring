@@ -1,0 +1,1 @@
+SUBSTRING(file_name, '[[:digit:]]{2}-[[:digit:]]{2}-[[:digit:]]{2}')
