@@ -1,0 +1,10 @@
+	select 
+	'CREATE TABLE ' || static_text.schema_name || '.' || static_text.table_prefix || '_' || static_text.yr || 'm' 
+	|| lpad(month::Text, 2, '0') 
+	|| ' PARTITION OF ' || static_text.schema_name || '.' || static_text.table_prefix || ' FOR VALUES FROM (''' || static_text.yr::text || '-' 
+	|| lpad(month::Text, 2, '0') || '-01'') TO ('''
+	|| case month when 12 then static_text.yr+1 else static_text.yr end || '-'
+	|| lpad((case month when 12 then 1 else month+1 end)::Text, 2, '0') 
+	|| '-01'');'	
+	from generate_series(2, 12) month, (select 2023 yr, 'smart_eob_medicare' schema_name, 'smart_eob_medicare' table_prefix) static_text
+	
