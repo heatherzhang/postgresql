@@ -6,5 +6,5 @@
 	|| case month when 12 then static_text.yr+1 else static_text.yr end || '-'
 	|| lpad((case month when 12 then 1 else month+1 end)::Text, 2, '0') 
 	|| '-01'');'	
-	from generate_series(2, 12) month, (select 2023 yr, 'smart_eob_medicare' schema_name, 'smart_eob_medicare' table_prefix) static_text
+	from generate_series(2, 12) month, (select 2023 yr, 'your_schema' schema_name, 'your_table' table_prefix) static_text
 	
